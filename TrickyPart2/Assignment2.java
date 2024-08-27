@@ -1,5 +1,4 @@
 package TrickyPart2;
-
 public class Assignment2 {
     public static void main(String[] args) {
         Number n1 = new Number();
