@@ -1,3 +1,4 @@
+package TrickyPart1;
 public class Assignment1 {
     public static void main(String[] args) {
         Number n1 = new Number();
