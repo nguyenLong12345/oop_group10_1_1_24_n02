@@ -1,4 +1,4 @@
-package cau1Code2Week2.debug;
+package Code2Week2.AcessControl.debug;
 
 public class Debug {
     public void debug(String s) {
