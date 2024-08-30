@@ -1,8 +1,7 @@
-package bai1Code2Week2.debug;
+package cau1Code2Week2.debug;
 
-public class debug {
+public class Debug {
     public void debug(String s) {
         System.out.println(s);
     }
-    
 }
