@@ -1,7 +1,6 @@
 package Code2Week2.AcessControl;
 
-import Code2Week2.AcessControl.access.Animals;
-import Code2Week2.AcessControl.access.Dog;
+import Code2Week2.AcessControl.Ex4.*;
 
 public class Exercise4 {
 

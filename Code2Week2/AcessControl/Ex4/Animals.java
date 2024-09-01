@@ -1,4 +1,4 @@
-package Code2Week2.AcessControl.access;
+package Code2Week2.AcessControl.Ex4;
 
 public class Animals {
     protected void makeSound() {
