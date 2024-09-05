@@ -1,18 +1,23 @@
 package Code2Week2.ReusingClassess;
 
 class A {
-    A(){};
-}
-
-class B {
-    B(){};
-    public void run(){
-        System.out.println("method run");
+    A() {
+        System.out.println("Constructor of A");
     }
 }
 
-public class Exercise5 extends A {
+class B {
+    B() {
+        System.out.println("Constructor of B");
+    }
+}
+
+class C extends A {
+    B b = new B();
+}
+
+public class Exercise5 {
     public static void main(String[] args) {
-        Exercise5 obj = new Exercise5();
+        C c = new C();
     }
 }
