@@ -14,9 +14,4 @@ public class Radar {
         System.out.printf("X tại n=%d: %.2f", n, value);
     }
 
-    public static void main(String[] args) {
-        Radar radar = new Radar();
-
-        radar.printSignalAt(4);
-    }
 }
