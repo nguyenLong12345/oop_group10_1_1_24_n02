@@ -1,4 +1,4 @@
-package main.java.com.mycompany;
+package Code1Week2;
 
 public class NNCollection {
     private NameNumber[] nnArray = new NameNumber[100];
