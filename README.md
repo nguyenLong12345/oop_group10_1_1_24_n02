@@ -12,3 +12,9 @@
 |:-----------------:|:---------:|:-------:|
 | Nguyễn Công Long  | 22013896  | Code 1, Code 2: c1 3 5 |
 | Nguyễn Chí	Tài   | 23010548  | Code 3, Code 2: c2 4   |
+
+### Week 4
+| Contributors      | ID        | Task    |  
+|:-----------------:|:---------:|:-------:|
+| Nguyễn Công Long  | 22013896  | Code 1, Code 2: c1 2  |
+| Nguyễn Chí	Tài   | 23010548  | Code 3, Code 2: c3    |
