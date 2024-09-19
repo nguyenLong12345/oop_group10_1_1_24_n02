@@ -1,6 +1,6 @@
 package Code2Week2.AcessControl;
 
-import main.java.com.mycompany.NameNumber;
+import Code1Week2.NameNumber;
 
 public class Exercise1 {
     public static void main(String[] args) {
