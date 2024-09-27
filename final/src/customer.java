@@ -17,5 +17,5 @@ public class customer {
     private int id;
     private int sdt;
 
-    public customer(String n, int, )
+    
 }
