@@ -32,18 +32,6 @@ public class DangNhap extends javax.swing.JFrame {
 
         jLabel2.setText("Mật khẩu");
 
-        account.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                accountActionPerformed(evt);
-            }
-        });
-
-        passwordField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                passwordFieldActionPerformed(evt);
-            }
-        });
-
         nutDangNhap.setBackground(new java.awt.Color(255, 255, 51));
         nutDangNhap.setForeground(new java.awt.Color(51, 0, 51));
         nutDangNhap.setText("Đăng nhập");
@@ -64,9 +52,7 @@ public class DangNhap extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(147, 147, 147)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(nutDangNhap, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(mesError, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(nutDangNhap))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(62, 62, 62)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -79,8 +65,11 @@ public class DangNhap extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel3)
-                                    .addComponent(account, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                .addContainerGap(100, Short.MAX_VALUE))
+                                    .addComponent(account, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(131, 131, 131)
+                        .addComponent(mesError, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(72, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -122,39 +111,25 @@ public class DangNhap extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void passwordFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_passwordFieldActionPerformed
-
-    private void accountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_accountActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_accountActionPerformed
-
     private void nutDangNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nutDangNhapActionPerformed
+        // TODO add your handling code here:
         
         String username = account.getText();
         String password = passwordField.getText();
+        
+        if (username.equals("1") && password.equals("1")) {
+            setVisible(false);
 
-        if (username.equals("admin") && password.equals("1")) {
-            mesError.setText("Login successful!");
-            mesError.setForeground(Color.GREEN);
-
-            // Ẩn màn hình đăng nhập và mở giao diện tiếp theo
-            openNextView();
+            // Tạo và hiển thị màn hình mới
+            HotelMS nextView = new HotelMS();
+            nextView.setVisible(true);
         } else {
             mesError.setText("TK or MK không đúng!");
             mesError.setForeground(Color.RED);
         }
     }//GEN-LAST:event_nutDangNhapActionPerformed
 
-    private void openNextView() {
-        // Ẩn màn hình đăng nhập
-        this.setVisible(false);
-        
-        // Tạo và hiển thị màn hình mới
-        HotelMS nextView = new HotelMS();
-        nextView.setVisible(true);
-    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField account;
