@@ -1,5 +1,7 @@
 
-package view;
+package main;
+
+import view.DangNhap;
 
 
 public class Main {
