@@ -1,22 +1,25 @@
-
 package view;
 
 import control.listCustomerControl;
+import control.modifyCustomerControl;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import module.Customer;
 
-
 public class DSCustomer extends javax.swing.JFrame {
+
     private listCustomerControl listcustomer;
+    private modifyCustomerControl modifycustomer;
+
     /**
      * Creates new form DSCustomer
      */
     public DSCustomer() {
         initComponents();
         listcustomer = new listCustomerControl();
-        
+        modifycustomer = new modifyCustomerControl();
+
     }
 
     /**
@@ -45,6 +48,7 @@ public class DSCustomer extends javax.swing.JFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
+                {null, null, null, null},
                 {null, null, null, null}
             },
             new String [] {
@@ -97,74 +101,42 @@ public class DSCustomer extends javax.swing.JFrame {
             tableModel.addRow(rowData);
         }
     }
-    
+
     private void modifyCustomer() {
         int selectedRow = jTable1.getSelectedRow();
-        if (selectedRow != -1) {
-            try {
-                //int id = JOptionPane.showInputDialog(null, "Nhập id mới", jTable1.getValueAt(selectedRow, 0));
-                int id = Integer.parseInt(jTable1.getValueAt(selectedRow, 0).toString());
-                String name = JOptionPane.showInputDialog(null, "Nhập tên mới", jTable1.getValueAt(selectedRow, 1));
-                int phone = Integer.parseInt(jTable1.getValueAt(selectedRow, 2).toString());
-                String address = JOptionPane.showInputDialog(null, "Nhập địa chỉ mới", jTable1.getValueAt(selectedRow, 3));
 
-                // Kiểm tra tính hợp lệ của dữ liệu
-                if (name == null || name.trim().isEmpty() || address == null || address.trim().isEmpty()) {
-                    throw new IllegalArgumentException("Tên và địa chỉ không được để trống.");
-                }
-
-                // Tạo đối tượng Customer
-                Customer customer = new Customer(id, name, phone, address);
-
-                // Cập nhật dữ liệu vào bảng
-                jTable1.setValueAt(customer.getName(), selectedRow, 1);
-                jTable1.setValueAt(customer.getAddress(), selectedRow, 2);
-
-                // Cập nhật dữ liệu vào database
-                // updateCustomerInDatabase(customer);
-
-            } catch (NumberFormatException ex) {
-                JOptionPane.showMessageDialog(null, "ID không hợp lệ.", "Lỗi", JOptionPane.ERROR_MESSAGE);
-            } catch (IllegalArgumentException ex) {
-                JOptionPane.showMessageDialog(null, ex.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
-            }
-        }
-    }
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
         try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(DSCustomer.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(DSCustomer.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(DSCustomer.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(DSCustomer.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+            String name = JOptionPane.showInputDialog(null, "Nhập tên mới", jTable1.getValueAt(selectedRow, 1));
+            String numberphone = JOptionPane.showInputDialog(null, "Nhập phone mới", jTable1.getValueAt(selectedRow, 2));
+            String address = JOptionPane.showInputDialog(null, "Nhập địa chỉ mới", jTable1.getValueAt(selectedRow, 3));
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new DSCustomer().setVisible(true);
+            // Kiểm tra tính hợp lệ của dữ liệu
+            if (name == null || name.trim().isEmpty() || numberphone == null || numberphone.trim().isEmpty()) {
+                throw new IllegalArgumentException("Tên và số điện thoại không được để trống.");
             }
-        });
+            int phone = 0;
+            try {
+                phone = Integer.parseInt(numberphone);
+                jTable1.setValueAt(name, selectedRow, 1);
+                jTable1.setValueAt(phone, selectedRow, 2);
+                jTable1.setValueAt(address, selectedRow, 3);
+                JOptionPane.showMessageDialog(this, "sửa thành công.");
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(this, "phone nhập sai.");
+            }
+
+            // Cập nhật dữ liệu vào database
+            int customerID = (int) jTable1.getValueAt(selectedRow, 0);
+            Customer customer = new Customer(customerID, name, phone, address);
+            modifycustomer.modifyCustomerToDatabase(customer);
+
+        } catch (IllegalArgumentException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
+        }
+
     }
+
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPopupMenu jPopupMenu1;
