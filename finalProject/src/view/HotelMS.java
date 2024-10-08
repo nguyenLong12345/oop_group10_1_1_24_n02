@@ -60,6 +60,7 @@ public class HotelMS extends javax.swing.JFrame {
         statusField = new javax.swing.JComboBox<>();
         LoadButton = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        listcustomer = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -102,6 +103,11 @@ public class HotelMS extends javax.swing.JFrame {
         });
 
         makePayment.setText("tạo hóa đơn");
+        makePayment.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                makePaymentActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("roomID");
 
@@ -134,37 +140,17 @@ public class HotelMS extends javax.swing.JFrame {
 
         jButton1.setText("tìm phòng");
 
+        listcustomer.setText("list customer");
+        listcustomer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                listcustomerActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(64, 64, 64)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(roomIDField, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(priceField, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(47, 47, 47)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel3))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(12, 12, 12)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(roomTypeField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(statusField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(38, 38, 38)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(addRoom)
-                            .addComponent(modifyRoom, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(9, 9, 9)
-                        .addComponent(jLabel1)))
-                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(18, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -172,21 +158,48 @@ public class HotelMS extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(deleteRoom, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(140, 140, 140)
+                                .addGap(236, 236, 236)
                                 .addComponent(bookRoom)
                                 .addGap(18, 18, 18)
                                 .addComponent(makePayment)
+                                .addGap(45, 45, 45)
+                                .addComponent(listcustomer)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(deleteRoom, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(listRoomAvalable)
                                 .addGap(34, 34, 34)))
+                        .addComponent(LoadButton, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(46, 46, 46)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(LoadButton, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(roomIDField, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(priceField, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(47, 47, 47)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel3))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(19, 19, 19)
-                                .addComponent(jButton1)))))
+                                .addGap(12, 12, 12)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(roomTypeField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(statusField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(38, 38, 38)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(modifyRoom, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(addRoom)
+                                        .addGap(49, 49, 49)
+                                        .addComponent(jButton1))))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(9, 9, 9)
+                                .addComponent(jLabel1)))))
                 .addGap(24, 24, 24))
         );
         jPanel1Layout.setVerticalGroup(
@@ -200,7 +213,8 @@ public class HotelMS extends javax.swing.JFrame {
                     .addComponent(jLabel2)
                     .addComponent(roomTypeField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3)
-                    .addComponent(addRoom))
+                    .addComponent(addRoom)
+                    .addComponent(jButton1))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
@@ -211,15 +225,15 @@ public class HotelMS extends javax.swing.JFrame {
                 .addGap(33, 33, 33)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(LoadButton)
-                    .addComponent(listRoomAvalable))
+                    .addComponent(listRoomAvalable)
+                    .addComponent(deleteRoom))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(deleteRoom)
                     .addComponent(bookRoom)
                     .addComponent(makePayment)
-                    .addComponent(jButton1))
+                    .addComponent(listcustomer))
                 .addContainerGap(22, Short.MAX_VALUE))
         );
 
@@ -250,43 +264,12 @@ public class HotelMS extends javax.swing.JFrame {
 
     private void addRoomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addRoomActionPerformed
         // TODO add your handling code here:
-
-        int roomID = Integer.parseInt(roomIDField.getText());
-        String roomType = (String) roomTypeField.getSelectedItem();
-        int price = Integer.parseInt(priceField.getText());
-        String status = (String) statusField.getSelectedItem();
-
-        // Tạo đối tượng Room
-        Room room = new Room(roomID, roomType, price, status);
-
-        // Gọi RoomController để thêm phòng vào database
-        boolean success = addroom.addRoomToDatabase(room);
-
-        if (success) {
-            JOptionPane.showMessageDialog(this, "Thêm phòng thành công!");
-        } else {
-            JOptionPane.showMessageDialog(this, "Nhập sai.");
-        }
+        addRoom();
     }//GEN-LAST:event_addRoomActionPerformed
 
     private void modifyRoomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modifyRoomActionPerformed
         // TODO add your handling code here:
-        int roomID = Integer.parseInt(roomIDField.getText());
-        String roomType = (String) roomTypeField.getSelectedItem();
-        int price = Integer.parseInt(priceField.getText());
-        String status = (String) statusField.getSelectedItem();
-
-        // Tạo đối tượng Room
-        Room room = new Room(roomID, roomType, price, status);
-
-        // Gọi RoomController để thêm phòng vào database
-        boolean success = modifyroom.modifyRoomToDatabase(room);
-
-        if (success) {
-            JOptionPane.showMessageDialog(this, "Sửa phòng thành công!");
-        } else {
-            JOptionPane.showMessageDialog(this, "vui lòng nhập đúng");
-        }
+        modifyRoom();
     }//GEN-LAST:event_modifyRoomActionPerformed
 
     private void bookRoomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookRoomActionPerformed
@@ -300,22 +283,18 @@ public class HotelMS extends javax.swing.JFrame {
 
     private void deleteRoomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteRoomActionPerformed
         // TODO add your handling code here:
-        int selectedRow = jTable1.getSelectedRow();
-        if (selectedRow != -1) {
-            // Lấy ID của dòng được chọn
-            int id = (int) jTable1.getValueAt(selectedRow, 0);
-
-            // Xóa dòng khỏi JTable
-            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-            model.removeRow(selectedRow);
-
-            // Xóa dữ liệu khỏi cơ sở dữ liệu
-            delroom.delRoomToDatabase(id);
-            JOptionPane.showMessageDialog(this, "Xóa thành công.");
-        } else {
-            JOptionPane.showMessageDialog(this, "Chọn dòng để xóa.");
-        }
+        deleteRoom();
     }//GEN-LAST:event_deleteRoomActionPerformed
+
+    private void listcustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listcustomerActionPerformed
+        // TODO add your handling code here:        
+        DSCustomer ds = new DSCustomer();
+        ds.setVisible(true);
+    }//GEN-LAST:event_listcustomerActionPerformed
+
+    private void makePaymentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_makePaymentActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_makePaymentActionPerformed
 
     private void displayRoomData() {
         // Lấy model của JTable
@@ -349,7 +328,61 @@ public class HotelMS extends javax.swing.JFrame {
         }
     }
     
+    private void addRoom() {
+        int roomID = Integer.parseInt(roomIDField.getText());
+        String roomType = (String) roomTypeField.getSelectedItem();
+        int price = Integer.parseInt(priceField.getText());
+        String status = (String) statusField.getSelectedItem();
 
+        // Tạo đối tượng Room
+        Room room = new Room(roomID, roomType, price, status);
+
+        // Gọi RoomController để thêm phòng vào database
+        boolean success = addroom.addRoomToDatabase(room);
+
+        if (success) {
+            JOptionPane.showMessageDialog(this, "Thêm phòng thành công!");
+        } else {
+            JOptionPane.showMessageDialog(this, "Nhập sai.");
+        }
+    }
+
+    private void modifyRoom(){
+        int roomID = Integer.parseInt(roomIDField.getText());
+        String roomType = (String) roomTypeField.getSelectedItem();
+        int price = Integer.parseInt(priceField.getText());
+        String status = (String) statusField.getSelectedItem();
+
+        // Tạo đối tượng Room
+        Room room = new Room(roomID, roomType, price, status);
+
+        // Gọi RoomController để thêm phòng vào database
+        boolean success = modifyroom.modifyRoomToDatabase(room);
+
+        if (success) {
+            JOptionPane.showMessageDialog(this, "Sửa phòng thành công!");
+        } else {
+            JOptionPane.showMessageDialog(this, "vui lòng nhập đúng");
+        }
+    }
+    
+    private void deleteRoom() {
+        int selectedRow = jTable1.getSelectedRow();
+        if (selectedRow != -1) {
+            // Lấy ID của dòng được chọn
+            int id = (int) jTable1.getValueAt(selectedRow, 0);
+
+            // Xóa dòng khỏi JTable
+            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+            model.removeRow(selectedRow);
+
+            // Xóa dữ liệu khỏi cơ sở dữ liệu
+            delroom.delRoomToDatabase(id);
+            JOptionPane.showMessageDialog(this, "Xóa thành công.");
+        } else {
+            JOptionPane.showMessageDialog(this, "Chọn dòng để xóa.");
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton LoadButton;
@@ -366,6 +399,7 @@ public class HotelMS extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JButton listRoomAvalable;
+    private javax.swing.JButton listcustomer;
     private javax.swing.JButton makePayment;
     private javax.swing.JButton modifyRoom;
     private javax.swing.JTextField priceField;
