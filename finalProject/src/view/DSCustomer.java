@@ -1,6 +1,6 @@
 package view;
 
-import control.listCustomerControl;
+import control.loadData;
 import control.modifyCustomerControl;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -9,7 +9,7 @@ import module.Customer;
 
 public class DSCustomer extends javax.swing.JFrame {
 
-    private listCustomerControl listcustomer;
+    private loadData loaddata;
     private modifyCustomerControl modifycustomer;
 
     /**
@@ -17,7 +17,7 @@ public class DSCustomer extends javax.swing.JFrame {
      */
     public DSCustomer() {
         initComponents();
-        listcustomer = new listCustomerControl();
+        loaddata = new loadData();
         modifycustomer = new modifyCustomerControl();
 
     }
@@ -94,7 +94,7 @@ public class DSCustomer extends javax.swing.JFrame {
         tableModel.setRowCount(0);
 
         // Lấy dữ liệu từ loaddata
-        List<Object[]> customerData = listcustomer.loadCustomerData();
+        List<Object[]> customerData = loaddata.loadCustomerData();
 
         // Thêm dữ liệu vào bảng
         for (Object[] rowData : customerData) {
