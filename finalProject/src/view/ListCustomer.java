@@ -7,7 +7,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import module.Customer;
 
-public class DSCustomer extends javax.swing.JFrame {
+public class ListCustomer extends javax.swing.JFrame {
 
     private loadData loaddata;
     private modifyCustomerControl modifycustomer;
@@ -15,7 +15,7 @@ public class DSCustomer extends javax.swing.JFrame {
     /**
      * Creates new form DSCustomer
      */
-    public DSCustomer() {
+    public ListCustomer() {
         initComponents();
         loaddata = new loadData();
         modifycustomer = new modifyCustomerControl();
