@@ -1,8 +1,8 @@
 package view;
 
+import control.loadData;
 import control.addRoomControl;
 import control.deleteRoomControl;
-import control.loadData;
 import control.modifyRoomControl;
 import control.searchRoomControl;
 import java.util.List;
@@ -171,8 +171,18 @@ public class HotelMS extends javax.swing.JFrame {
         jLabel9.setText("name");
 
         listbooking.setText("list booking");
+        listbooking.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                listbookingActionPerformed(evt);
+            }
+        });
 
         listpayment.setText("list payment");
+        listpayment.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                listpaymentActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -246,7 +256,7 @@ public class HotelMS extends javax.swing.JFrame {
                                         .addComponent(makePayment))
                                     .addGap(0, 0, Short.MAX_VALUE)))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(deleteRoom, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(deleteRoom)
                         .addGap(18, 18, 18)
                         .addComponent(searchRoom)
                         .addGap(18, 18, 18)
@@ -261,15 +271,16 @@ public class HotelMS extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addGap(26, 26, 26)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(roomTypeField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(phoneField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6)
-                    .addComponent(customerIDField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(roomIDField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel2)
+                        .addComponent(roomTypeField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(phoneField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel6)
+                        .addComponent(customerIDField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel8)
+                        .addComponent(roomIDField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
@@ -345,8 +356,8 @@ public class HotelMS extends javax.swing.JFrame {
 
     private void listcustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listcustomerActionPerformed
         // TODO add your handling code here:        
-        ListCustomer ds = new ListCustomer();
-        ds.setVisible(true);
+        ListCustomer lc = new ListCustomer();
+        lc.setVisible(true);
     }//GEN-LAST:event_listcustomerActionPerformed
 
     private void makePaymentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_makePaymentActionPerformed
@@ -357,6 +368,18 @@ public class HotelMS extends javax.swing.JFrame {
         // TODO add your handling code here:
         searchRoom();
     }//GEN-LAST:event_searchRoomActionPerformed
+
+    private void listbookingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listbookingActionPerformed
+        // TODO add your handling code here:
+        ListBookRoom lb = new ListBookRoom();
+        lb.setVisible(true);
+    }//GEN-LAST:event_listbookingActionPerformed
+
+    private void listpaymentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listpaymentActionPerformed
+        // TODO add your handling code here:
+        ListPayment lp = new ListPayment();
+        lp.setVisible(true);
+    }//GEN-LAST:event_listpaymentActionPerformed
 
     private void displayRoomData() {
         // Lấy model của JTable
@@ -391,40 +414,62 @@ public class HotelMS extends javax.swing.JFrame {
     }
 
     private void addRoom() {
-        int roomID = Integer.parseInt(roomIDField.getText());
+        String ID = roomIDField.getText();
         String roomType = (String) roomTypeField.getSelectedItem();
-        int price = Integer.parseInt(priceField.getText());
+        String p = priceField.getText();
         String status = (String) statusField.getSelectedItem();
 
-        // Tạo đối tượng Room
-        Room room = new Room(roomID, roomType, price, status);
-
-        // Gọi addRoomControl để thêm phòng vào database
-        boolean success = addroom.addRoomToDatabase(room);
-
-        if (success) {
-            JOptionPane.showMessageDialog(this, "Thêm phòng thành công!");
+        if (ID.trim().isEmpty() || p.trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Phải nhập đủ thông tin.");
         } else {
-            JOptionPane.showMessageDialog(this, "Nhập sai.");
+            try {
+                // Chuyển đổi về int
+                int roomID = Integer.parseInt(ID);
+                int price = Integer.parseInt(p);
+                // Tạo đối tượng Room
+                Room room = new Room(roomID, roomType, price, status);
+
+                // Gọi addRoomControl để thêm phòng vào database
+                boolean success = addroom.addRoomToDatabase(room);
+
+                if (success) {
+                    JOptionPane.showMessageDialog(this, "Thêm phòng thành công!");
+                } else {
+                    JOptionPane.showMessageDialog(this, "Phòng tồn tại!.");
+                }
+            } catch (IllegalArgumentException ex) {
+                JOptionPane.showMessageDialog(null, "Nhập sai định dạng!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            }
         }
     }
 
     private void modifyRoom() {
-        int roomID = Integer.parseInt(roomIDField.getText());
+        String ID = roomIDField.getText();
         String roomType = (String) roomTypeField.getSelectedItem();
-        int price = Integer.parseInt(priceField.getText());
+        String p = priceField.getText();
         String status = (String) statusField.getSelectedItem();
 
-        // Tạo đối tượng Room
-        Room room = new Room(roomID, roomType, price, status);
-
-        // Gọi ModifyRoomControl để sửa phòng vào database
-        boolean success = modifyroom.modifyRoomToDatabase(room);
-
-        if (success) {
-            JOptionPane.showMessageDialog(this, "Sửa phòng thành công!");
+        if (ID.trim().isEmpty() || p.trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Phải nhập đủ thông tin.");
         } else {
-            JOptionPane.showMessageDialog(this, "vui lòng nhập đúng");
+            try {
+                // Chuyển đổi về int
+                int roomID = Integer.parseInt(ID);
+                int price = Integer.parseInt(p);
+                // Tạo đối tượng Room
+                Room room = new Room(roomID, roomType, price, status);
+
+                // Gọi addRoomControl để thêm phòng vào database
+                boolean success = modifyroom.modifyRoomToDatabase(room);
+
+                if (success) {
+                    JOptionPane.showMessageDialog(this, "Sửa phòng thành công!");
+                } else {
+                    JOptionPane.showMessageDialog(this, "Phòng không tồn tại!");
+                }
+            } catch (IllegalArgumentException ex) {
+                JOptionPane.showMessageDialog(null, "Nhập sai định dạng!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            }
         }
     }
 
@@ -453,14 +498,14 @@ public class HotelMS extends javax.swing.JFrame {
                 // Chuyển roomID thành số nguyên
                 int roomId = Integer.parseInt(roomIdText);
                 Room room = search.searchRoom(roomId);
-                if (room != null){
+                if (room != null) {
                     DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
                     model.setRowCount(0);
                     model.addRow(new Object[]{room.getRoomID(), room.getRoomType(), room.getPrice(), room.getStatus()});
                 } else {
                     JOptionPane.showMessageDialog(this, "Không tìm thấy phòng.");
                 }
-                
+
             } catch (NumberFormatException ex) {
                 JOptionPane.showMessageDialog(this, "Vui lòng nhập đúng định dạng ID.", "Error", JOptionPane.ERROR_MESSAGE);
             }
