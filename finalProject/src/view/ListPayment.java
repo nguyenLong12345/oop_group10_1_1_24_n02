@@ -1,14 +1,20 @@
 
 package view;
 
+import control.loadData;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+
 
 public class ListPayment extends javax.swing.JFrame {
-
+    private loadData loaddata;
     /**
      * Creates new form HoaDon
      */
     public ListPayment() {
         initComponents();
+        loaddata = new loadData();
+        displayPaymentData();
     }
 
     /**
@@ -27,13 +33,10 @@ public class ListPayment extends javax.swing.JFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "paymentID", "bookingID", "total", "status"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
@@ -58,39 +61,20 @@ public class ListPayment extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ListPayment.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ListPayment.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ListPayment.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ListPayment.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+    private void displayPaymentData() {
+        // Lấy model của JTable
+        DefaultTableModel tableModel = (DefaultTableModel) jTable1.getModel();
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new ListPayment().setVisible(true);
-            }
-        });
+        // Xóa dữ liệu cũ
+        tableModel.setRowCount(0);
+
+        // Lấy dữ liệu từ loaddata
+        List<Object[]> paymentData = loaddata.loadPaymentData();
+
+        // Thêm dữ liệu vào bảng
+        for (Object[] rowData : paymentData) {
+            tableModel.addRow(rowData);
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

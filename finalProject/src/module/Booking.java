@@ -8,13 +8,23 @@ public class Booking {
     private int customerID;
     private String checkInDate;
     private String checkOutDate;
+    private String status;
 
-    public Booking(String bookingID, int roomID, int customerID, String checkInDate, String checkOutDate) {
+    public Booking(String bookingID, int roomID, int customerID, String checkInDate, String checkOutDate, String status) {
         this.bookingID = bookingID;
         this.roomID = roomID;
         this.customerID = customerID;
         this.checkInDate = checkInDate;
         this.checkOutDate = checkOutDate;
+        this.status = status;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public String getBookingID() {
