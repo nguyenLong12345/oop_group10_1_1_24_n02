@@ -2,12 +2,15 @@ package view;
 
 import control.loadData;
 import control.addRoomControl;
+import control.bookRoomControl;
 import control.deleteRoomControl;
 import control.modifyRoomControl;
 import control.searchRoomControl;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import module.Booking;
+import module.Customer;
 import module.Room;
 
 public class HotelMS extends javax.swing.JFrame {
@@ -17,6 +20,7 @@ public class HotelMS extends javax.swing.JFrame {
     private deleteRoomControl delroom;
     private modifyRoomControl modifyroom;
     private searchRoomControl search;
+    private bookRoomControl bookroom;
 
     /**
      * Creates new form HotelMS
@@ -28,6 +32,7 @@ public class HotelMS extends javax.swing.JFrame {
         delroom = new deleteRoomControl();
         modifyroom = new modifyRoomControl();
         search = new searchRoomControl();
+        bookroom = new bookRoomControl();
         displayRoomData();
     }
 
@@ -344,6 +349,7 @@ public class HotelMS extends javax.swing.JFrame {
 
     private void bookRoomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookRoomActionPerformed
         // TODO add your handling code here:
+        bookRoom();
     }//GEN-LAST:event_bookRoomActionPerformed
 
     private void LoadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoadButtonActionPerformed
@@ -515,6 +521,69 @@ public class HotelMS extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Chưa nhập ID.", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
+
+    private void bookRoom() {
+        String ID = customerIDField.getText();
+        String name = nameField.getText();
+        String p = phoneField.getText();
+        String address = addressField.getText();
+        int selectedRow = jTable1.getSelectedRow();
+
+        if (ID.trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Phải nhập customerID.");
+            return;
+        }
+
+        if (selectedRow == -1) {
+            JOptionPane.showMessageDialog(null, "Chưa chọn phòng.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        if (!jTable1.getValueAt(selectedRow, 3).equals("avalable")) {
+            JOptionPane.showMessageDialog(null, "Phải chọn phòng còn trống.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        try {
+            // Chuyển đổi về int
+            int customerID = Integer.parseInt(ID);
+            int roomID = (int) jTable1.getValueAt(selectedRow, 0);
+
+            // Kiểm tra xem customerID đã tồn tại hay chưa
+            if (bookroom.isCustomerExist(customerID)) {
+                // Nếu khách hàng đã tồn tại, không cần nhập thông tin khác
+                String checkOutDate = JOptionPane.showInputDialog(null, "Enter Check-out Date (YYYY/MM/DD):");
+
+                // Tạo đối tượng Booking
+                Booking booking = new Booking(customerID, roomID, checkOutDate);
+                bookroom.saveBooking(booking);
+            } else {
+                // Nếu khách hàng chưa tồn tại, kiểm tra các trường thông tin khác
+                if (name.trim().isEmpty() || p.trim().isEmpty() || address.trim().isEmpty()) {
+                    JOptionPane.showMessageDialog(this, "Phải nhập đủ thông tin khách hàng nếu chưa có.");
+                    return;
+                }
+
+                int phone = Integer.parseInt(p);
+                String checkOutDate = JOptionPane.showInputDialog(null, "Enter Check-out Date (YYYY/MM/DD):");
+
+                // Tạo đối tượng Customer và Booking
+                Customer customer = new Customer(customerID, name, phone, address);
+                Booking booking = new Booking(customerID, roomID, checkOutDate);
+
+                // Lưu cả customer và booking
+                bookroom.saveCustomer(customer);
+                bookroom.saveBooking(booking);
+            }
+
+            // Cập nhật trạng thái phòng trong bảng
+            jTable1.setValueAt("full", selectedRow, 3);
+            JOptionPane.showMessageDialog(null, "Đặt phòng thành công!", "Success", JOptionPane.ERROR_MESSAGE);
+        } catch (IllegalArgumentException ex) {
+            JOptionPane.showMessageDialog(null, "Nhập sai định dạng!", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton LoadButton;

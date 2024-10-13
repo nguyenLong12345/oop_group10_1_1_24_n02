@@ -4,19 +4,16 @@ package module;
 
 public class Booking {
     private String bookingID;
-    private int roomID;
     private int customerID;
+    private int roomID;
     private String checkInDate;
     private String checkOutDate;
     private String status;
 
-    public Booking(String bookingID, int roomID, int customerID, String checkInDate, String checkOutDate, String status) {
-        this.bookingID = bookingID;
-        this.roomID = roomID;
+    public Booking(int customerID, int roomID, String checkOutDate) {
         this.customerID = customerID;
-        this.checkInDate = checkInDate;
+        this.roomID = roomID;
         this.checkOutDate = checkOutDate;
-        this.status = status;
     }
 
     public String getStatus() {
