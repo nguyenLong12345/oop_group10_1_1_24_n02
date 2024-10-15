@@ -1,19 +1,25 @@
-
 package view;
 
 import control.loadData;
+import control.confirmBookingControl;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-
+import module.Payment;
+import java.sql.SQLException;
 
 public class ListBookRoom extends javax.swing.JFrame {
+
     private loadData loaddata;
+    private confirmBookingControl confirm;
+
     /**
      * Creates new form BookRoom
      */
     public ListBookRoom() {
         initComponents();
         loaddata = new loadData();
+        confirm = new confirmBookingControl();
         displayBookingData();
     }
 
@@ -89,10 +95,12 @@ public class ListBookRoom extends javax.swing.JFrame {
 
     private void confirmbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmbuttonActionPerformed
         // TODO add your handling code here:
+        confirmBooking();
     }//GEN-LAST:event_confirmbuttonActionPerformed
 
     private void cancelbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelbuttonActionPerformed
         // TODO add your handling code here:
+        cancelBooking();
     }//GEN-LAST:event_cancelbuttonActionPerformed
 
     private void displayBookingData() {
@@ -109,6 +117,39 @@ public class ListBookRoom extends javax.swing.JFrame {
         for (Object[] rowData : bookingData) {
             tableModel.addRow(rowData);
         }
+    }
+
+    public void confirmBooking() {
+
+        int selectedRow = jTable1.getSelectedRow();
+        if (selectedRow != -1) {
+            // kiểm tra status
+            String pstatus = (String) jTable1.getValueAt(selectedRow, 5);
+            if (pstatus.equals("waiting")) {
+                // Lấy bookingID từ dòng được chọn
+                int bookingID = (int) jTable1.getValueAt(selectedRow, 0);
+                // lấy giá 
+                int total = confirm.getRoomPriceFromBooking(bookingID);
+
+                // Gọi controller để xử lý việc xác nhận và tạo Payment
+                Payment payment = new Payment(bookingID, total);
+                confirm.savePayment(payment);
+
+                // Cập nhật trạng thái của booking thành "confirm"
+                confirm.updateBookingStatus(bookingID);
+                jTable1.setValueAt("confirm", selectedRow, 5);
+                JOptionPane.showMessageDialog(null, "Xác nhận thành công!", "Success", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, "Đã xác nhận rồi!", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Chưa chọn booking nào!", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+
+    }
+
+    public void cancelBooking() {
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

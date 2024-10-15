@@ -3,23 +3,21 @@ package module;
 
 
 public class Payment {
-    private String paymentID;
-    private String bookingID;
+    private int paymentID;
+    private int bookingID;
     private int total;
     private String paymentStatus;
 
-    public Payment(String paymentID, String bookingID, int total, String paymentStatus) {
-        this.paymentID = paymentID;
+    public Payment(int bookingID, int total) {
         this.bookingID = bookingID;
         this.total = total;
-        this.paymentStatus = paymentStatus;
     }
 
-    public String getPaymentID() {
+    public int getPaymentID() {
         return paymentID;
     }
 
-    public String getBookingID() {
+    public int getBookingID() {
         return bookingID;
     }
 
@@ -31,11 +29,11 @@ public class Payment {
         return paymentStatus;
     }
 
-    public void setPaymentID(String paymentID) {
+    public void setPaymentID(int paymentID) {
         this.paymentID = paymentID;
     }
 
-    public void setBookingID(String bookingID) {
+    public void setBookingID(int bookingID) {
         this.bookingID = bookingID;
     }
 
@@ -46,6 +44,5 @@ public class Payment {
     public void setPaymentStatus(String paymentStatus) {
         this.paymentStatus = paymentStatus;
     }
-    
     
 }
