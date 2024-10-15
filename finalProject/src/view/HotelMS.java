@@ -512,16 +512,20 @@ public class HotelMS extends javax.swing.JFrame {
     private void deleteRoom() {
         int selectedRow = jTable1.getSelectedRow();
         if (selectedRow != -1) {
-            // Lấy ID của dòng được chọn
-            int id = (int) jTable1.getValueAt(selectedRow, 0);
+            // Lấy roomID của dòng được chọn
+            int roomID = (int) jTable1.getValueAt(selectedRow, 0);
+            boolean exit = delroom.isRoomDataExist(roomID);
+            if (exit) {
+                JOptionPane.showMessageDialog(this, "Không thể xóa!.");
+            } else {
+                // Xóa dòng khỏi JTable
+                DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+                model.removeRow(selectedRow);
 
-            // Xóa dòng khỏi JTable
-            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-            model.removeRow(selectedRow);
-
-            // Xóa dữ liệu khỏi cơ sở dữ liệu
-            delroom.delRoomToDatabase(id);
-            JOptionPane.showMessageDialog(this, "Xóa thành công.");
+                // Xóa dữ liệu khỏi cơ sở dữ liệu
+                delroom.delRoomToDatabase(roomID);
+                JOptionPane.showMessageDialog(this, "Xóa thành công.");
+            }
         } else {
             JOptionPane.showMessageDialog(this, "Chọn dòng để xóa.");
         }

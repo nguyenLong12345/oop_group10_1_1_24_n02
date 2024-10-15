@@ -162,6 +162,8 @@ public class ListBookRoom extends javax.swing.JFrame {
                 int roomID = (int) jTable1.getValueAt(selectedRow, 2);
                 // Hủy booking
                 cancel.cancelBooking(bookingID);
+                DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+                model.removeRow(selectedRow);
                 // Cập nhật lại status room
                 cancel.updateStatusRoom(roomID);
                 JOptionPane.showMessageDialog(null, "Hủy thành công!", "Success", JOptionPane.INFORMATION_MESSAGE);

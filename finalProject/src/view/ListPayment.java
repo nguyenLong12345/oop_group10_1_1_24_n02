@@ -3,17 +3,23 @@ package view;
 
 import control.loadData;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-
+import control.makePaymentControl;
+import control.cancelBookingControl;
 
 public class ListPayment extends javax.swing.JFrame {
     private loadData loaddata;
+    private makePaymentControl payment;
+    private cancelBookingControl remove;
     /**
      * Creates new form HoaDon
      */
     public ListPayment() {
         initComponents();
         loaddata = new loadData();
+        payment = new makePaymentControl();
+        remove = new cancelBookingControl();
         displayPaymentData();
     }
 
@@ -43,6 +49,11 @@ public class ListPayment extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTable1);
 
         makepayment.setText("make payment");
+        makepayment.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                makepaymentActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -70,6 +81,11 @@ public class ListPayment extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void makepaymentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_makepaymentActionPerformed
+        // TODO add your handling code here:
+        makePayment();
+    }//GEN-LAST:event_makepaymentActionPerformed
+
     private void displayPaymentData() {
         // Lấy model của JTable
         DefaultTableModel tableModel = (DefaultTableModel) jTable1.getModel();
@@ -83,6 +99,32 @@ public class ListPayment extends javax.swing.JFrame {
         // Thêm dữ liệu vào bảng
         for (Object[] rowData : paymentData) {
             tableModel.addRow(rowData);
+        }
+    }
+    
+    public void makePayment() {
+        int selectedRow = jTable1.getSelectedRow();
+        if (selectedRow != -1) {
+            // kiểm tra status
+            String pstatus = (String) jTable1.getValueAt(selectedRow, 3);
+            if (pstatus.equals("waiting")) {
+                // Lấy paymentID từ dòng được chọn
+                int paymentID = (int) jTable1.getValueAt(selectedRow, 0);
+                // Lấy bookingID từ dòng được chọn
+                int bookingID = (int) jTable1.getValueAt(selectedRow, 1);
+                // Lấy roomID
+                int roomID = payment.getRoomIDForMakePayment(bookingID);
+                // Cập nhật lại payment status
+                payment.updatePaymentStatus(paymentID);
+                jTable1.setValueAt("done", selectedRow, 3);
+                // Cập nhật lại status room
+                remove.updateStatusRoom(roomID);
+                JOptionPane.showMessageDialog(null, "Done!", "Success", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, "Đã Payment!", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Chưa chọn hóa đơn nào!", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 
