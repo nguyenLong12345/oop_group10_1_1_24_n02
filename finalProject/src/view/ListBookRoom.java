@@ -6,12 +6,13 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import module.Payment;
-import java.sql.SQLException;
+import control.cancelBookingControl;
 
 public class ListBookRoom extends javax.swing.JFrame {
 
     private loadData loaddata;
     private confirmBookingControl confirm;
+    private cancelBookingControl cancel;
 
     /**
      * Creates new form BookRoom
@@ -20,6 +21,7 @@ public class ListBookRoom extends javax.swing.JFrame {
         initComponents();
         loaddata = new loadData();
         confirm = new confirmBookingControl();
+        cancel = new cancelBookingControl();
         displayBookingData();
     }
 
@@ -149,7 +151,26 @@ public class ListBookRoom extends javax.swing.JFrame {
     }
 
     public void cancelBooking() {
-
+        int selectedRow = jTable1.getSelectedRow();
+        if (selectedRow != -1) {
+            // kiểm tra status
+            String pstatus = (String) jTable1.getValueAt(selectedRow, 5);
+            if (pstatus.equals("waiting")) {
+                // Lấy bookingID từ dòng được chọn
+                int bookingID = (int) jTable1.getValueAt(selectedRow, 0);
+                // Lấy roomID từ dòng được chọn
+                int roomID = (int) jTable1.getValueAt(selectedRow, 2);
+                // Hủy booking
+                cancel.cancelBooking(bookingID);
+                // Cập nhật lại status room
+                cancel.updateStatusRoom(roomID);
+                JOptionPane.showMessageDialog(null, "Hủy thành công!", "Success", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, "Không thể hủy!", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Chưa chọn booking nào!", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
