@@ -2,9 +2,9 @@ package view;
 
 import java.awt.Color;
 
-public class DangNhap extends javax.swing.JFrame {
+public class Login extends javax.swing.JFrame {
 
-    public DangNhap() {
+    public Login() {
         initComponents();
     }
 
@@ -29,27 +29,27 @@ public class DangNhap extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setText("Tài khoản");
+        jLabel1.setText("Account");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 130, 65, -1));
 
-        jLabel2.setText("Mật khẩu");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 170, 56, -1));
+        jLabel2.setText("Password");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 170, 70, -1));
         getContentPane().add(account, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 130, 136, -1));
         getContentPane().add(passwordField, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 170, 136, -1));
 
         nutDangNhap.setBackground(new java.awt.Color(255, 255, 51));
         nutDangNhap.setForeground(new java.awt.Color(51, 0, 51));
-        nutDangNhap.setText("Đăng nhập");
+        nutDangNhap.setText("Login");
         nutDangNhap.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nutDangNhapActionPerformed(evt);
             }
         });
-        getContentPane().add(nutDangNhap, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 250, -1, 34));
+        getContentPane().add(nutDangNhap, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 240, -1, 34));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel3.setText("Đăng nhập");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 60, -1, -1));
+        jLabel3.setText("Login");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 60, -1, -1));
         getContentPane().add(mesError, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 220, 178, 17));
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 470, 340));
 

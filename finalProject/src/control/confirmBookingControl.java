@@ -53,6 +53,22 @@ public class confirmBookingControl {
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
+    }
+    
+    public int NumberOfDays(int bookingID) {
+        try {
+            Connection connection = DatabaseConnection.getConnection();
 
+            String sql = "SELECT DATEDIFF(day, checkInDate, checkOutDate) AS NumberOfDays FROM Booking WHERE bookingID = ?";
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            stmt.setInt(1, bookingID);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return rs.getInt("NumberOfDays");
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return 0;
     }
 }

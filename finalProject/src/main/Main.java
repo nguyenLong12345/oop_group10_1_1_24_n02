@@ -1,12 +1,12 @@
 
 package main;
 
-import view.DangNhap;
+import view.Login;
 
 
 public class Main {
     public static void main(String[] args) {
-        DangNhap login = new DangNhap();
+        Login login = new Login();
         login.setVisible(true);
     }
 }

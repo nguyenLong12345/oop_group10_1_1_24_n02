@@ -130,9 +130,10 @@ public class ListBookRoom extends javax.swing.JFrame {
             if (pstatus.equals("waiting")) {
                 // Lấy bookingID từ dòng được chọn
                 int bookingID = (int) jTable1.getValueAt(selectedRow, 0);
-                // lấy giá 
-                int total = confirm.getRoomPriceFromBooking(bookingID);
-
+                // lấy giá của phòng
+                int price = confirm.getRoomPriceFromBooking(bookingID);
+                // tính tổng giá
+                int total = price * confirm.NumberOfDays(bookingID);
                 // Gọi controller để xử lý việc xác nhận và tạo Payment
                 Payment payment = new Payment(bookingID, total);
                 confirm.savePayment(payment);

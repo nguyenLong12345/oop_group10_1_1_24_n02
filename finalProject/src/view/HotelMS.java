@@ -122,15 +122,15 @@ public class HotelMS extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setText("roomID");
+        jLabel2.setText("Room ID");
 
         roomTypeField.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "normal", "noble", "royal" }));
 
-        jLabel3.setText("roomType");
+        jLabel3.setText("Room Type");
 
-        jLabel4.setText("price");
+        jLabel4.setText("Price");
 
-        jLabel5.setText("status");
+        jLabel5.setText("Status");
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -142,7 +142,7 @@ public class HotelMS extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        statusField.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "avalable", "full", "repairing" }));
+        statusField.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "avalable", "repairing" }));
         statusField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 statusFieldActionPerformed(evt);
@@ -176,13 +176,13 @@ public class HotelMS extends javax.swing.JFrame {
             }
         });
 
-        jLabel6.setText("phone");
+        jLabel6.setText("Phone");
 
-        jLabel7.setText("address");
+        jLabel7.setText("Address");
 
-        jLabel8.setText("customerID");
+        jLabel8.setText("Customer ID");
 
-        jLabel9.setText("name");
+        jLabel9.setText("Name");
 
         listbooking.setText("list booking");
         listbooking.addActionListener(new java.awt.event.ActionListener() {
@@ -291,16 +291,15 @@ public class HotelMS extends javax.swing.JFrame {
                         .addComponent(roomTypeField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(3, 3, 3)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
-                            .addComponent(roomIDField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(3, 3, 3)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel6)
-                            .addComponent(phoneField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(customerIDField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel8))))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel2)
+                                .addComponent(roomIDField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel6)
+                                .addComponent(phoneField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(customerIDField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel8)))))
                 .addGap(3, 3, 3)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
